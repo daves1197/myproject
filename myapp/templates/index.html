@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div style="text-align: center;">
+
+    <h2>Seminar's which are available</h2>
+    <hr>
+    {% if user.is_authenticated %}
+
+
+    <div class="wrap">
+        {% for s in seminar %}
+
+
+        <div class="wrap-item">
+            <img src="{{s.url_image}}" width="200px" height="auto">
+            <hr>
+            <h2><a href="{% url 'detail' s.id %}">{{s.seminar_titel}}</a></h2><br>
+            <div style="border: 1px solid grey;">
+                <p style="text-decoration: underline; "><strong>What you will learn:</strong></p>
+                <p>{{s.seminar_description}}</p>
+            </div><br>
+            <p> Rating: {{s.seminar_rating}} </p>
+
+            <button class="btn btn-primary" onclick="location.href='{% url 'detail' s.id %}'">Show details</button>
+            <button class="btn btn-primary" onclick="location.href='{% url 'part' s.id %}'">participate</button>
+        </div>
+
+        {% empty %}
+        <p>No seminars available</p>
+        {% endfor %}
+
+    </div>
+    <br>
+
+
+    {% else %}
+
+    <h5>Login to book a seminar!</h5>
+
+    {% endif %}
+</div>
+
+
+{% endblock %}

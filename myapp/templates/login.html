@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div style="text-align: center;">
+    <h2>Login</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <hr>
+<div style="background-color: lightblue; width: 500px; margin: auto; padding: 20px; border: 1px solid white; border-radius: 10px;">
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+          
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username"/><br>
+
+            <input class="form-control" type="password" name="password" placeholder="Password"/><br>
+            
+            <input class="btn btn-primary" type="submit" value="Login"><br>
+    </form>
+<br>
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+</div>
+</div>
+
+{% endblock %}

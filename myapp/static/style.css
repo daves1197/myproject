@@ -1,0 +1,99 @@
+h2{
+    margin: 10px;
+}
+
+.wrap {
+    display: grid;
+    grid-row-gap: 30px;
+    grid-template-columns: 33% 33% 33%;
+    padding: 10px;
+}
+
+.wrap-item{
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.content-wrap{
+    display: grid;
+    grid-row-gap: 30px;
+    grid-template-columns: 50% 50%;
+    padding: 10px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+
+.des{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .wrap {
+
+        display: grid;
+        grid-column-gap: 20px;
+        grid-row-gap: 10px;
+        grid-template-columns: 50% 50%;
+    }
+
+
+  }
+
+  @media screen and (max-width: 480px) {
+    .wrap {
+
+        display: grid;
+        grid-column-gap: 20px;
+        grid-row-gap: 10px;
+        grid-template-columns: 100%;
+    }
+
+    .navbar navbar-expand-lg navbar-light bg-primary{
+        text-align: center;
+    }
+
+  }
+

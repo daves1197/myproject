@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<h2>Are you sure to participate for course:  {{seminar.seminar_titel}} ?</h2>
+
+{% if request.user.is_authenticated %}
+<form method="POST" action="{% url 'part' seminar.id %}">
+    {% csrf_token %}
+    {% if button == "participate" %}
+    <button type="submit" class="btn btn-primary ml-2" name="button" value="participate">participate</button>
+    {% else %}
+    <button type="submit" class="btn btn-danger ml-2" name="button" value="check out from course">check out from course</button>
+    {% endif %}
+</form>
+{% endif %}
+<br>
+<a href="{% url 'detail' seminar.id %}">Back to detail page</a>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<h2 style="text-align: center;">Detail page for: {{seminar.seminar_titel}}</h2>
+<hr>
+
+<div class="content-wrap">
+    <img src="{{seminar.url_image}}" width="650px" height="auto">
+
+    <div>
+
+        <div class="des">
+            <p style="text-decoration: underline; "><strong>What you will learn:</strong></p>
+            <p>{{seminar.seminar_description}}</p>
+        </div>
+        <br>
+
+        <div class="des">
+            
+        <p style="text-decoration: underline; "><strong>current rating:</strong></p>
+        
+        <div class="rate">
+            <input type="radio" id="star5" name="rate" value="5" />
+            <label for="star5" title="text">5 stars</label>
+            <input type="radio" id="star4" name="rate" value="4" />
+            <label for="star4" title="text">4 stars</label>
+            <input type="radio" id="star3" name="rate" value="3" />
+            <label for="star3" title="text">3 stars</label>
+            <input type="radio" id="star2" name="rate" value="2" />
+            <label for="star2" title="text">2 stars</label>
+            <input type="radio" id="star1" name="rate" value="1" />
+            <label for="star1" title="text">1 star</label>
+          </div><br>
+          {% csrf_token %}
+          <button id="btn" type="submit"class="btn btn-primary" onclick="rate('{{ seminar.id }}')">Rate now!</button>
+    
+    <div id="rating" value="{{seminar.seminar_rating}}">{{seminar.seminar_rating}}</div><br>
+    <div id="counter" style="display: none;">{{seminar.counter}}</div>
+
+        </div>
+        <br>
+
+        <div class="des">
+            
+        <p style="text-decoration: underline; "><strong>current reviews:</strong></p>
+
+        {% for c in comment %}
+            {{c}} :<p style="font-weight: bold;">{{c.comment}}</p>
+        {% endfor %}
+        </div>
+              <br>
+
+        <div class="des">
+            <p style="text-decoration: underline; "><strong>current number of participants:</strong></p>
+            <div id="counter">{{part}}</div>
+        </div>
+        <br>
+        <div class="des">
+            <p style="text-decoration: underline; "><strong>Dates of the course</strong></p>
+            {{seminar.date}}
+            {{seminar.start_time}}
+            {{seminar.end_time}}
+        </div>
+
+
+    </div><br>
+</div>
+
+<div style="text-align: center;">
+    <h3>Are you interested?</h3>
+    <button class="btn btn-primary" id="btn-par" onclick="location.href='{% url 'part' seminar.id %}'">participate</button>
+    {% if leader %}
+    <a href="{% url 'close' seminar.id %}">Close course</a>
+    {% endif %}
+    <br>
+    <br>
+    <hr>
+</div>
+{% if user.is_authenticated %}
+<form method="POST" action="{% url 'detail' seminar.id %}">
+    <div class="form-group" style="text-align: center;">
+        <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="write a review..."></textarea><br>
+        <input class="btn btn-primary" type="submit" value="write review">
+    </div>
+</form>
+
+{% endif %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'main.js' %}"></script>
+{% endblock %}

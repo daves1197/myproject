@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+
+
+<h2 style="text-align: center;">Create Seminar</h2>
+<hr>
+
+
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+
+        <label for="title">Seminar title: </label>
+        <input class="form-control" autofocus type="text" name="titel" id="title" placeholder="seminar titel..."><br>
+
+        <label for="des">Seminar description: </label>
+        <input class="form-control" type="text" name="description" id="des" placeholder="seminar description"><br>
+
+        <label for="start">Start time: </label>
+        <input placeholder="Selected start time" id="start" name="start" type="time" class="form-control timepicker"><br>
+
+        <label for="end">End time: </label>
+        <input placeholder="Selected end time" type="time" name="end" id="end" class="form-control timepicker"><br>
+
+        <label for="end">Date: </label>
+        <input placeholder="Selected date" type="date" name="date" id="date" class="form-control datepicker"><br>
+
+        <label for="end">Image url for your Seminar: </label>
+        <input placeholder="Image url" type="text" name="url" id="url" class="form-control"><br>
+
+        <label for="cat">Choose a category: </label><br>
+        <select id="cat" class="form-control" name="cat">
+            {% for c in category %}
+                <option value="{{c.category}}">{{c.category}}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <input class="btn btn-primary" type="submit" value="create seminar"><br>
+    </form>
+
+</div>
+</div>
+{% endif %}
+
+{% endblock %}

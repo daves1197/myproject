@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+{% for s in seminar%}
+{% if s.is_ended %}
+
+{% else %}
+<a href="{% url 'detail' s.id %}">{{s.seminar.seminar_titel}}</a><br>
+{% endif %}
+
+{% endfor %}
+{% endblock %}
